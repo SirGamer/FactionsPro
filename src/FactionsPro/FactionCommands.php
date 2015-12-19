@@ -74,7 +74,7 @@ class FactionCommands {
 							if($this->plugin->prefs->get("FactionNametags")) {
 								$this->plugin->updateTag($player);
 							}
-							$sender->sendMessage($this->plugin->formatMessage("Faction successfully created!", true));
+							$sender->sendMessage($this->plugin->formatMessage("You've created the faction " . TextFormat::YELLOW . "$factionName" . TextFormat::DARK_GRAY . ".", true));
 							return true;
 						}
 					}
@@ -87,20 +87,20 @@ class FactionCommands {
 							return true;
 						}
 						if(!$this->plugin->isInFaction($player)) {
-							$sender->sendMessage($this->plugin->formatMessage("You must be in a faction to use this"));
+							$sender->sendMessage($this->plugin->formatMessage("You must be in a faction to use this."));
 							return true;
 						}
 						if(!$this->plugin->isLeader($player) && !$this->plugin->hasPermission($player, "invite")) {
-							$sender->sendMessage($this->plugin->formatMessage("You do not have permission to do this"));
+							$sender->sendMessage($this->plugin->formatMessage("You do not have permission to do this!"));
 							return true;
 						}
 						if( $this->plugin->isFactionFull($this->plugin->getPlayerFaction($player)) ) {
-							$sender->sendMessage($this->plugin->formatMessage("Faction is full. Please kick players to make room."));
+							$sender->sendMessage($this->plugin->formatMessage("Faction is full. Please kick players to make room with the command" . TextFormat::YELLOW . "/f kick <Player>" . TextFormat::DARK_GRAY . "."));
 							return true;
 						}
 						$invited = $this->plugin->getServer()->getPlayerExact($args[1]);
 						if($this->plugin->isInFaction($invited) == true) {
-							$sender->sendMessage($this->plugin->formatMessage("Player is currently in a faction"));
+							$sender->sendMessage($this->plugin->formatMessage("That player is currently in a faction."));
 							return true;
 						}
 						if(!$invited instanceof Player) {
